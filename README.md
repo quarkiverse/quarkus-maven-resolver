@@ -7,16 +7,32 @@ This extension initializes a Maven resolver implementation from the Quarkus boot
 
 This extension can be used in both the JVM and the native modes.
 
-## Maven dependency
+## Dependency info
 
-The extension can be added to an application by adding the following dependency
+### Maven
+
+The extension can be added to a Maven project by adding the following dependency:
 
 ```xml
     <dependency>
       <groupId>io.quarkiverse.mavenresolver</groupId>
       <artifactId>quarkiverse-maven-resolver</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.0.2-SNAPSHOT</version>
     </dependency>
+```
+
+### Gradle
+
+In case of a Gradle project, the following should be included into the `build.gradle` script:
+
+```
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.quarkiverse.mavenresolver:quarkiverse-maven-resolver:0.0.2-SNAPSHOT'
+}
 ```
 
 ## API example
