@@ -142,3 +142,13 @@ public class ArtifactResolverResource {
     }
 }
 ```
+
+## Resolver initialization
+
+The resolver will be eagerly initialized at application boot time by reading the local user settings file, typically located at `~/.m2/settings.xml`.
+
+### Initialization in native mode
+
+The resolver implementation is based on the Maven resolver API. Simply speaking, the key components of the resolver are a `RepositorySystem`, a `RepositorySystemSession` and a `RemoteRepository`.
+The `RepositorySystem` is not supposed to depend on the environment in which the application is going to be launched. So the `RepositorySystem` part of the resolver is initialized
+during the application build time and is serialized into the native image. The other parts of the resolver will be initialized on every boot of the application consulting the local Maven settings.
