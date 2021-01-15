@@ -10,7 +10,7 @@
 
     <groupId>io.quarkiverse.mavenresolver</groupId>
     <artifactId>quarkiverse-maven-resolver-parent</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>Quarkiverse - Maven Resolver - Parent</name>
 
     <packaging>pom</packaging>
@@ -51,8 +51,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
-  <scm>
-    <tag>0.0.1</tag>
-  </scm>
 </project>
