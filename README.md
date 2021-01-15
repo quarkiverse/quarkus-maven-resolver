@@ -1,31 +1,132 @@
-# Welcome to Quarkiverse!
+# Quarkiverse Maven Resolver Extension
 
-Congratulations and thank you for creating a new Quarkus extension project in Quarkiverse!
+This extension initializes a Maven resolver implementation from the Quarkus bootstrap project and provides it as a CDI bean to applications.
 
-Feel free to replace this content with the proper description of your new project and necessary instructions how to use and contribute to it.
+This extension can be used in both the JVM and the native modes.
 
-You can find the basic info, Quarkiverse policies and conventions in [the Quarkiverse wiki](https://github.com/quarkiverse/quarkiverse/wiki).
+## Example
 
-Need to quickly create a new Quarkus extension Maven project? Just execute the command below replacing the template values with your preferred ones:
+```java
+package org.acme.quarkus.sample;
+
+import java.io.IOException;
+import java.nio.file.Files;
+
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import org.eclipse.aether.artifact.Artifact;
+import org.eclipse.aether.artifact.DefaultArtifact;
+
+import io.quarkus.bootstrap.resolver.maven.BootstrapMavenContext;
+import io.quarkus.bootstrap.resolver.maven.BootstrapMavenException;
+import io.quarkus.bootstrap.resolver.maven.MavenArtifactResolver;
+
+@Path("/resolver")
+public class ArtifactResolverResource {
+
+    /**
+     * Artifact resolver
+     */
+    @Inject
+    MavenArtifactResolver resolver;
+
+    /**
+     * Provides access to various resolver settings and also original Maven resolver API
+     */
+    @Inject
+    BootstrapMavenContext mvnCtx;
+
+    /**
+     * Resolve and return the content of an artifact
+     * specified with groupId:artifactId::type:version,
+     * i.e. with an empty classifier
+     * 
+     * @param groupId  artifact groupId
+     * @param artifactId  artifact id
+     * @param type  artifact type
+     * @param version  artifact version
+     * @return  artifact content
+     */
+    @GET
+    @Path("/resolve/{groupId}/{artifactId}/{type}/{version}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String resolve(@PathParam("groupId") String groupId,
+        @PathParam("artifactId") String artifactId,
+        @PathParam("type") String type,
+        @PathParam("version") String version) {
+
+        return resolveInternal(groupId, artifactId, null, type, version);
+    }
+
+    /**
+     * Resolve and return the content of an artifact
+     * specified with groupId:artifactId:classifier:type:version
+     * 
+     * @param groupId  artifact groupId
+     * @param artifactId  artifact id
+     * @param classifier  artifact classifier
+     * @param type  artifact type
+     * @param version  artifact version
+     * @return  artifact content
+     */
+    @GET
+    @Path("/resolve/{groupId}/{artifactId}/{classifier}/{type}/{version}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String resolve(@PathParam("groupId") String groupId,
+        @PathParam("artifactId") String artifactId,
+        @PathParam("classifier") String classifier,
+        @PathParam("type") String type,
+        @PathParam("version") String version) {
+
+        return resolveInternal(groupId, artifactId, classifier, type, version);
+    }
+
+    private String resolveInternal(String groupId, String artifactId, String classifier, String type, String version) {
+        Artifact artifact = new DefaultArtifact(groupId, artifactId, classifier, type, version);
+        try {
+            artifact = resolver.resolve(artifact).getArtifact();
+        } catch (BootstrapMavenException e) {
+            throw new IllegalStateException("Failed to resolve " + artifact, e);
+        }
+
+        try {
+            return Files.readString(artifact.getFile().toPath());
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to read " + artifact.getFile(), e);
+        }
+    }
+
+    /**
+     * Return the path to the local Maven repository used by the resolver
+     * 
+     * @return  path to the local Maven repository used by the resolver
+     */
+    @GET
+    @Path("/local-repo")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String localRepo() {
+        try {
+            return mvnCtx.getLocalRepo();
+        } catch (BootstrapMavenException e) {
+            throw new IllegalStateException("Failed to obtain the local repo path", e);
+        }
+    }
+
+    /**
+     * Return the path to the user settings file used to initialize the resolver
+     * 
+     * @return  path to the user settings file used to initialize the resolver
+     */
+    @GET
+    @Path("/user-settings")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String userSettings() {
+        return mvnCtx.getUserSettings().toString();
+    }
+}
 ```
-mvn io.quarkus:quarkus-maven-plugin:<QUARKUS_VERSION>:create-extension -N \
-    -DgroupId=io.quarkiverse.<REPO_NAME> \ 
-    -DartifactId=<EXTENSION_ARTIFACT_ID> \  
-    -Dversion=<INITIAL_VERSION> \ 
-    -Dquarkus.nameBase="<EXTENSION_SIMPLE_NAME>"
-```
-**IMPORTANT:** make sure your project uses [io.quarkiverse:quarkiverse-parent](https://github.com/quarkiverse/quarkiverse-parent) as the parent POM. It will make sure the release and artifact publishing plugins are properly configured for your project.
-
-In case you are creating a Quarkus extension project for the first time, please follow [Building My First Extension](https://quarkus.io/guides/building-my-first-extension) guide.
-
-Other useful articles related to Quarkus extension development can be found under the [Writing Extensions](https://quarkus.io/guides/#writing-extensions) guide category on the [Quarkus.io](http://quarkus.io) website.
-
-Thanks again, good luck and have fun!
-
-## Documentation
-
-The documentation for this extension should be maintained as part of this repository and it is stored in the `docs/` directory. 
-
-The layout should follow the [Antora's Standard File and Directory Set](https://docs.antora.org/antora/2.3/standard-directories/).
-
-Once the docs are ready to be published, please open a PR including this repository in the [Quarkiverse Docs Antora playbook](https://github.com/quarkiverse/quarkiverse-docs/blob/master/antora-playbook.yml#L7). See an example [here](https://github.com/quarkiverse/quarkiverse-docs/pull/1).
