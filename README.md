@@ -1,4 +1,7 @@
 # Quarkiverse Maven Resolver Extension
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This extension initializes a Maven resolver implementation from the Quarkus bootstrap project and provides it as a CDI bean to applications.
 
@@ -152,3 +155,22 @@ The resolver will be eagerly initialized at application boot time by reading the
 The resolver implementation is based on the Maven resolver API. Simply speaking, the key components of the resolver are a `RepositorySystem`, a `RepositorySystemSession` and a `RemoteRepository`.
 The `RepositorySystem` is not supposed to depend on the environment in which the application is going to be launched. So the `RepositorySystem` part of the resolver is initialized
 during the application build time and is serialized into the native image. The other parts of the resolver will be initialized on every boot of the application consulting the local Maven settings.
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/aloubyansky"><img src="https://avatars1.githubusercontent.com/u/323379?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alexey Loubyansky</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkiverse-maven-resolver/commits?author=aloubyansky" title="Code">💻</a> <a href="#maintenance-aloubyansky" title="Maintenance">🚧</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
