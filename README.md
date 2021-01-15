@@ -4,7 +4,19 @@ This extension initializes a Maven resolver implementation from the Quarkus boot
 
 This extension can be used in both the JVM and the native modes.
 
-## Example
+## Maven dependency
+
+The extension can be added to an application by adding the following dependency
+
+```xml
+    <dependency>
+      <groupId>io.quarkiverse.mavenresolver</groupId>
+      <artifactId>quarkiverse-mavenresolver</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+```
+
+## API example
 
 ```java
 package org.acme.quarkus.sample;
