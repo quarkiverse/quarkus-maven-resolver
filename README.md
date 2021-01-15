@@ -11,7 +11,7 @@ The extension can be added to an application by adding the following dependency
 ```xml
     <dependency>
       <groupId>io.quarkiverse.mavenresolver</groupId>
-      <artifactId>quarkiverse-mavenresolver</artifactId>
+      <artifactId>quarkiverse-maven-resolver</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
 ```

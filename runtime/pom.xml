@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.quarkiverse.mavenresolver</groupId>
-        <artifactId>quarkiverse-mavenresolver-parent</artifactId>
+        <artifactId>quarkiverse-maven-resolver-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>quarkiverse-mavenresolver</artifactId>
+    <artifactId>quarkiverse-maven-resolver</artifactId>
     <name>Quarkiverse - Maven Resolver - Runtime</name>
 
     <dependencies>

@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>io.quarkiverse.mavenresolver</groupId>
-    <artifactId>quarkiverse-mavenresolver-parent</artifactId>
+    <artifactId>quarkiverse-maven-resolver-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Quarkiverse - Maven Resolver - Parent</name>
 
