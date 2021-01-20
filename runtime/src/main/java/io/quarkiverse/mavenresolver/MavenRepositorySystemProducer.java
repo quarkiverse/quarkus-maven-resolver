@@ -16,7 +16,8 @@ public class MavenRepositorySystemProducer {
 
     public MavenRepositorySystemProducer() {
         try {
-            final BootstrapMavenContext mvnCtx = new BootstrapMavenContext();
+            final BootstrapMavenContext mvnCtx = new BootstrapMavenContext(
+                    BootstrapMavenContext.config().setWorkspaceDiscovery(false));
             repoSystem = mvnCtx.getRepositorySystem();
             remoteRepoManager = mvnCtx.getRemoteRepositoryManager();
         } catch (Exception e) {
