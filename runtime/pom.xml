@@ -9,8 +9,9 @@
     </parent>
 
     <artifactId>quarkus-maven-resolver</artifactId>
-    <name>Quarkus - Maven Resolver - Runtime</name>
-
+    <name>Quarkus - Maven Resolver Runtime</name>
+    <description>An extension providing a Maven resolver implementation from the Quarkus core bootstrap project</description>
+    
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
