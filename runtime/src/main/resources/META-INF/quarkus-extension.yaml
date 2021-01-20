@@ -1,0 +1,8 @@
+---
+name: "Maven Resolver"
+metadata:
+  keywords:
+  - "maven"
+  categories:
+  - "miscellaneous"
+  status: "stable"
