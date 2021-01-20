@@ -1,4 +1,4 @@
-# Quarkiverse Maven Resolver Extension
+# Quarkus Maven Resolver Extension
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
@@ -16,7 +16,7 @@ The extension can be added to a Maven project by adding the following dependency
 ```xml
     <dependency>
       <groupId>io.quarkiverse.mavenresolver</groupId>
-      <artifactId>quarkiverse-maven-resolver</artifactId>
+      <artifactId>quarkus-maven-resolver</artifactId>
       <version>0.0.2-SNAPSHOT</version>
     </dependency>
 ```
@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.quarkiverse.mavenresolver:quarkiverse-maven-resolver:0.0.2-SNAPSHOT'
+    implementation 'io.quarkiverse.mavenresolver:quarkus-maven-resolver:0.0.2-SNAPSHOT'
 }
 ```
 
