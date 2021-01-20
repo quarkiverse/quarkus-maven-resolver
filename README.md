@@ -17,7 +17,7 @@ The extension can be added to a Maven project by adding the following dependency
     <dependency>
       <groupId>io.quarkiverse.mavenresolver</groupId>
       <artifactId>quarkus-maven-resolver</artifactId>
-      <version>0.0.2-SNAPSHOT</version>
+      <version>0.0.3-SNAPSHOT</version>
     </dependency>
 ```
 
@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.quarkiverse.mavenresolver:quarkus-maven-resolver:0.0.2-SNAPSHOT'
+    implementation 'io.quarkiverse.mavenresolver:quarkus-maven-resolver:0.0.3-SNAPSHOT'
 }
 ```
 
