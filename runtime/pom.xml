@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.quarkiverse.mavenresolver</groupId>
-        <artifactId>quarkiverse-maven-resolver-parent</artifactId>
+        <artifactId>quarkus-maven-resolver-parent</artifactId>
         <version>0.0.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>quarkiverse-maven-resolver</artifactId>
-    <name>Quarkiverse - Maven Resolver - Runtime</name>
+    <artifactId>quarkus-maven-resolver</artifactId>
+    <name>Quarkus - Maven Resolver - Runtime</name>
 
     <dependencies>
         <dependency>
