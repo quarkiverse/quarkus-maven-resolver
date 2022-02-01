@@ -162,6 +162,16 @@ public class ArtifactResolverResource {
 }
 ```
 
+## Configuring extra Maven repositories
+
+By default, the resolver will be initialized from the Maven settings available in the environment, for example `~/.m2/settings.xml`. However, it is also possible to configure extra
+Maven repositories in the application configuration using the following format:
+```
+quarkus.maven-resolver.repositories.<repo-id>=<repo-url>
+```
+
+The configured repositories will be added to the already available Maven repositories unless they are already present in the user Maven settings.
+
 ## Resolver initialization
 
 The resolver will be eagerly initialized at application boot time by reading the local user settings file, typically located at `~/.m2/settings.xml`.

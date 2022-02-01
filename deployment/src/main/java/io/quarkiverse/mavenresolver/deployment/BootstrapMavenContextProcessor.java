@@ -33,6 +33,7 @@ class BootstrapMavenContextProcessor {
     void registerRuntimeInitializedClasses(BuildProducer<RuntimeInitializedClassBuildItem> resources) {
         resources.produce(new RuntimeInitializedClassBuildItem("org.apache.maven.wagon.providers.http.HttpWagon"));
         resources.produce(new RuntimeInitializedClassBuildItem("org.apache.maven.wagon.shared.http.AbstractHttpClientWagon"));
+        resources.produce(new RuntimeInitializedClassBuildItem("org.apache.http.impl.auth.NTLMEngineImpl"));
     }
 
     @BuildStep
