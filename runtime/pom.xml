@@ -11,7 +11,7 @@
     <artifactId>quarkus-maven-resolver</artifactId>
     <name>Quarkus - Maven Resolver Runtime</name>
     <description>An extension providing a Maven resolver implementation from the Quarkus core bootstrap project</description>
-    
+
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -27,7 +27,7 @@
         <plugins>
             <plugin>
                 <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-bootstrap-maven-plugin</artifactId>
+                <artifactId>quarkus-extension-maven-plugin</artifactId>
                 <version>${quarkus.version}</version>
                 <configuration>
                     <parentFirstArtifacts>
