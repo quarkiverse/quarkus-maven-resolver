@@ -7,10 +7,10 @@ import io.quarkus.runtime.annotations.Recorder;
 public class BootstrapMavenContextRecorder {
 
     public void initBootstrapMavenContextProducer(BeanContainer beanContainer) {
-        beanContainer.instance(BootstrapMavenContextProducer.class);
+        beanContainer.beanInstance(BootstrapMavenContextProducer.class);
     }
 
     public void initMavenRepositorySystemProducer(BeanContainer beanContainer) {
-        beanContainer.instance(MavenRepositorySystemProducer.class);
+        beanContainer.beanInstance(MavenRepositorySystemProducer.class);
     }
 }

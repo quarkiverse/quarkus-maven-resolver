@@ -43,7 +43,10 @@ class BootstrapMavenContextProcessor {
 
     @BuildStep
     void registerForReflection(BuildProducer<ReflectiveClassBuildItem> resources) {
-        resources.produce(new ReflectiveClassBuildItem(false, false, "org.apache.maven.wagon.providers.http.HttpWagon"));
+        resources.produce(ReflectiveClassBuildItem.builder("org.apache.maven.wagon.providers.http.HttpWagon")
+                .methods(false)
+                .fields(false)
+                .build());
     }
 
     @BuildStep

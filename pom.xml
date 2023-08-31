@@ -4,7 +4,7 @@
   <parent>
     <groupId>io.quarkiverse</groupId>
     <artifactId>quarkiverse-parent</artifactId>
-    <version>12</version>
+    <version>15</version>
   </parent>
   <groupId>io.quarkiverse.mavenresolver</groupId>
   <artifactId>quarkus-maven-resolver-parent</artifactId>
@@ -17,7 +17,7 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.parameters>true</maven.compiler.parameters>
-    <quarkus.version>2.16.4.Final</quarkus.version>
+    <quarkus.version>3.2.5.Final</quarkus.version>
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
   </properties>
   <scm>
