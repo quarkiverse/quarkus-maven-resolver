@@ -8,7 +8,7 @@
   </parent>
   <groupId>io.quarkiverse.mavenresolver</groupId>
   <artifactId>quarkus-maven-resolver-parent</artifactId>
-  <version>0.0.4</version>
+  <version>0.0.5-SNAPSHOT</version>
   <name>Quarkus - Maven Resolver - Parent</name>
   <packaging>pom</packaging>
   <properties>
@@ -24,7 +24,7 @@
     <connection>scm:git:git@github.com:quarkiverse/quarkus-maven-resolver.git</connection>
     <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-maven-resolver.git</developerConnection>
     <url>https://github.com/quarkiverse/quarkus-maven-resolver</url>
-    <tag>0.0.4</tag>
+    <tag>HEAD</tag>
   </scm>
   <modules>
     <module>deployment</module>
