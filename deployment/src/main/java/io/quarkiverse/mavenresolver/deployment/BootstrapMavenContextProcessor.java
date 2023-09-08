@@ -1,16 +1,22 @@
 package io.quarkiverse.mavenresolver.deployment;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+
 import io.quarkiverse.mavenresolver.BootstrapMavenContextProducer;
 import io.quarkiverse.mavenresolver.BootstrapMavenContextRecorder;
 import io.quarkiverse.mavenresolver.MavenRepositorySystemProducer;
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.BeanContainerBuildItem;
+import io.quarkus.bootstrap.classloading.QuarkusClassLoader;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.annotations.ExecutionTime;
 import io.quarkus.deployment.annotations.Record;
 import io.quarkus.deployment.builditem.ExtensionSslNativeSupportBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.NativeImageResourceBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.RuntimeInitializedClassBuildItem;
 
@@ -43,10 +49,30 @@ class BootstrapMavenContextProcessor {
 
     @BuildStep
     void registerForReflection(BuildProducer<ReflectiveClassBuildItem> resources) {
-        resources.produce(ReflectiveClassBuildItem.builder("org.apache.maven.wagon.providers.http.HttpWagon")
-                .methods(false)
-                .fields(false)
-                .build());
+        var named = "META-INF/sisu/javax.inject.Named";
+        var classNames = new ArrayList<String>();
+        for (var e : QuarkusClassLoader.getElements(named, false)) {
+            if (e.isRuntime()) {
+                e.apply(tree -> {
+                    tree.accept(named, visit -> {
+                        if (visit != null) {
+                            try {
+                                classNames.addAll(Files.readAllLines(visit.getPath()));
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                    });
+                    return null;
+                });
+            }
+        }
+        resources.produce(ReflectiveClassBuildItem.builder(classNames.toArray(new String[0])).build());
+    }
+
+    @BuildStep
+    NativeImageResourceBuildItem nativeImageResources() {
+        return new NativeImageResourceBuildItem("META-INF/sisu/javax.inject.Named");
     }
 
     @BuildStep
