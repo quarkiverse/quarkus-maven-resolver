@@ -3,35 +3,35 @@ package io.quarkiverse.mavenresolver;
 import java.util.Map;
 
 import io.quarkus.runtime.annotations.ConfigGroup;
-import io.quarkus.runtime.annotations.ConfigItem;
 import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
+import io.smallrye.config.ConfigMapping;
+import io.smallrye.config.WithParentName;
 
-@ConfigRoot(name = "maven-resolver", phase = ConfigPhase.RUN_TIME)
-public class MavenResolverRuntimeConfig {
+@ConfigMapping(prefix = "quarkus.maven-resolver")
+@ConfigRoot(phase = ConfigPhase.RUN_TIME)
+public interface MavenResolverRuntimeConfig {
 
     /**
      * List of extra Maven repositories to enabled
      */
-    @ConfigItem
-    RepositoriesRuntimeConfig repositories;
+    RepositoriesRuntimeConfig repositories();
 
     @ConfigGroup
-    public static class RepositoriesRuntimeConfig {
+    interface RepositoriesRuntimeConfig {
         /**
          * List of extra Maven repositories to enabled
          */
-        @ConfigItem(name = ConfigItem.PARENT)
-        public Map<String, RepositoryRuntimeConfig> repos;
+        @WithParentName
+        Map<String, RepositoryRuntimeConfig> repos();
     }
 
     @ConfigGroup
-    public static class RepositoryRuntimeConfig {
+    interface RepositoryRuntimeConfig {
 
         /**
          * Repository URL
          */
-        @ConfigItem(name = "url")
-        public String url;
+        String url();
     }
 }
