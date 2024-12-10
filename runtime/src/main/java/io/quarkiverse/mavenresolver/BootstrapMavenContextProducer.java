@@ -30,7 +30,7 @@ public class BootstrapMavenContextProducer {
                     .setWorkspaceDiscovery(false)
                     .setRepositorySystem(repoSystem)
                     .setRemoteRepositoryManager(remoteRepoManager));
-            final List<RemoteRepository> missingRepos = getMissingRepos(tmp, config.repositories.repos);
+            final List<RemoteRepository> missingRepos = getMissingRepos(tmp, config.repositories().repos());
             if (missingRepos.isEmpty()) {
                 mvnCtx = tmp;
             } else {
@@ -77,8 +77,8 @@ public class BootstrapMavenContextProducer {
 
         final List<RemoteRepository> extraList = new ArrayList<>(extraRepos.size());
         for (Map.Entry<String, RepositoryRuntimeConfig> r : extraRepos.entrySet()) {
-            if (!isRepositoryConfigured(mavenContext.getRemoteRepositories(), r.getValue().url)) {
-                extraList.add(new RemoteRepository.Builder(r.getKey(), "default", r.getValue().url).build());
+            if (!isRepositoryConfigured(mavenContext.getRemoteRepositories(), r.getValue().url())) {
+                extraList.add(new RemoteRepository.Builder(r.getKey(), "default", r.getValue().url()).build());
             }
         }
         if (extraList.isEmpty()) {
