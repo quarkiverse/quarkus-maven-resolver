@@ -31,14 +31,15 @@ class BootstrapMavenContextProcessor {
 
     @BuildStep
     void registerBeans(BuildProducer<AdditionalBeanBuildItem> additionalBeans) {
-        additionalBeans.produce(AdditionalBeanBuildItem.builder()
-                .addBeanClasses(MavenRepositorySystemProducer.class, BootstrapMavenContextProducer.class).build());
+        additionalBeans.produce(AdditionalBeanBuildItem.builder().addBeanClasses(MavenRepositorySystemProducer.class,
+                BootstrapMavenContextProducer.class).build());
     }
 
     @BuildStep
     void registerRuntimeInitializedClasses(BuildProducer<RuntimeInitializedClassBuildItem> resources) {
         resources.produce(new RuntimeInitializedClassBuildItem("org.apache.maven.wagon.providers.http.HttpWagon"));
-        resources.produce(new RuntimeInitializedClassBuildItem("org.apache.maven.wagon.shared.http.AbstractHttpClientWagon"));
+        resources.produce(new RuntimeInitializedClassBuildItem(
+                "org.apache.maven.wagon.shared.http.AbstractHttpClientWagon"));
         resources.produce(new RuntimeInitializedClassBuildItem("org.apache.http.impl.auth.NTLMEngineImpl"));
     }
 
@@ -76,7 +77,7 @@ class BootstrapMavenContextProcessor {
     }
 
     @BuildStep
-    @Record(ExecutionTime.STATIC_INIT)
+    @Record(ExecutionTime.RUNTIME_INIT)
     void recordStaticInit(BootstrapMavenContextRecorder recorder, BeanContainerBuildItem beanContainer) {
         recorder.initMavenRepositorySystemProducer(beanContainer.getValue());
     }
