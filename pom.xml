@@ -12,7 +12,7 @@
   <name>Quarkus - Maven Resolver - Parent</name>
   <packaging>pom</packaging>
   <properties>
-    <quarkus.version>3.27.1</quarkus.version>
+    <quarkus.version>3.40.1.2</quarkus.version>
   </properties>
   <scm>
     <connection>scm:git:git@github.com:quarkiverse/quarkus-maven-resolver.git</connection>
